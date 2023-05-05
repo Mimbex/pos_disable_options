@@ -20,6 +20,20 @@ const PosDisableAddProduct = (ProductScreen) =>
                 super._clickProduct(product);
             }
         }
+        _setValue(val) {
+            if (this.currentOrder.get_selected_orderline()) {
+                if (this.env.pos.numpadMode === 'quantity' && this.env.pos.config.allow_qty) {
+                    const result = this.currentOrder.get_selected_orderline().set_quantity(val);
+                    if (!result) NumberBuffer.reset();
+                } else if (this.env.pos.numpadMode === 'discount' && this.env.pos.config.allow_discount) {
+                    this.currentOrder.get_selected_orderline().set_discount(val);
+                } else if (this.env.pos.numpadMode === 'price' && this.env.pos.config.allow_price) {
+                    var selected_orderline = this.currentOrder.get_selected_orderline();
+                    selected_orderline.price_manually_set = true;
+                    selected_orderline.set_unit_price(val);
+                }
+            }
+        }
     };
 
 Registries.Component.extend(ProductScreen, PosDisableAddProduct);
