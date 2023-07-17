@@ -4,7 +4,7 @@
     'category': 'Point of Sale',
     'summary': 'Enable or disable specific POS functionalities for better access control',
     'depends': ['point_of_sale'],
-    'author': 'Dustin Mimbela Vallejo',
+    'author': 'Dustin Mimbela',
     "data"  :  ['views/pos_disable_options_view.xml'],
     'assets': {
         'point_of_sale.assets': [
